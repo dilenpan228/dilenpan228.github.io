@@ -1,0 +1,346 @@
+/* ============================================================
+   DESIGN TOKENS
+   ------------------------------------------------------------
+   :root          = LIGHT theme (the default)
+   [data-theme="dark"] = DARK theme overrides
+   Change any color here and it updates everywhere, both pages
+   and both themes.
+   ============================================================ */
+:root {
+  /* --- layout & type (shared by both themes) --- */
+  --maxw: 1080px;
+  --space: clamp(4rem, 9vw, 7rem);
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* --- LIGHT palette --- */
+  --paper:       #F3F3EE;
+  --paper-dim:   #E8E8E0;
+  --ink:         #14213D;
+  --ink-soft:    #44506B;
+  --accent:      #DA9A00;
+  --accent-deep: #A87600;
+  --line:        #D3D4CB;
+
+  /* the dark "feature" block (contact section) */
+  --feature-bg:   #14213D;
+  --feature-text: #F3F3EE;
+}
+
+[data-theme="dark"] {
+  /* --- DARK palette --- */
+  --paper:       #0F1620;
+  --paper-dim:   #1B2330;
+  --ink:         #E9EAE2;
+  --ink-soft:    #9BA7BD;
+  --accent:      #F0B429;
+  --accent-deep: #FFCB57;
+  --line:        #28323F;
+
+  --feature-bg:   #070B11;
+  --feature-text: #E9EAE2;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* smooth fade when switching themes */
+body, header, .card, .tag, .btn, .contact, .meta, .theme-toggle {
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+.logo span { color: var(--accent-deep); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.75rem);
+}
+.nav-links {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+.nav-links a { color: var(--ink-soft); transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+
+/* --- dark mode toggle button --- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink); }
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  padding: clamp(4.5rem, 12vw, 9rem) 0 clamp(3.5rem, 8vw, 6rem);
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 38px 38px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 80% 70% at 30% 30%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 30%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+.hero .wrap { position: relative; }
+
+.status { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.75rem; }
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2.4s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  max-width: 15ch;
+}
+.hero h1 em { font-style: normal; color: var(--accent-deep); }
+.hero .lead {
+  margin-top: 1.5rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  color: var(--ink-soft);
+  max-width: 48ch;
+}
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.5rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  padding: 0.8rem 1.4rem;
+  border: 1px solid var(--ink);
+}
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ============================================================
+   SECTION SCAFFOLD
+   ============================================================ */
+section { padding: var(--space) 0; }
+.section-head {
+  display: flex; align-items: baseline; gap: 1rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+.section-head .eyebrow { margin-left: auto; }
+
+/* ============================================================
+   WORK
+   ============================================================ */
+.projects { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+.card {
+  display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.card:hover {
+  border-color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0 var(--paper-dim);
+}
+@media (min-width: 720px) {
+  .card { grid-template-columns: 1.6fr 1fr; gap: 2.5rem; }
+}
+.card h3 {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 1.45rem;
+  letter-spacing: -0.01em; margin-bottom: 0.6rem;
+}
+.card p { color: var(--ink-soft); }
+.card-links {
+  display: flex; gap: 1.25rem; margin-top: 1.25rem;
+  font-family: var(--font-mono); font-size: 0.82rem;
+}
+.card-links a {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px; transition: color 0.2s;
+}
+.card-links a:hover { color: var(--accent-deep); }
+
+.meta {
+  display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1rem;
+  align-content: start;
+  font-family: var(--font-mono); font-size: 0.8rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed var(--line);
+}
+@media (min-width: 720px) {
+  .meta { border-top: none; border-left: 1px dashed var(--line); padding: 0 0 0 1.5rem; }
+}
+.meta dt { color: var(--ink-soft); }
+.meta dd { color: var(--ink); }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media (min-width: 760px) {
+  .about-grid { grid-template-columns: 1.4fr 1fr; gap: 4rem; }
+}
+.about-grid p { font-size: 1.05rem; margin-bottom: 1rem; color: var(--ink-soft); }
+.about-grid p strong { color: var(--ink); font-weight: 600; }
+.skills h4 {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--ink-soft); margin: 1.5rem 0 0.6rem;
+}
+.skills h4:first-child { margin-top: 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--line);
+  background: var(--paper-dim);
+}
+
+/* ============================================================
+   CONTACT (feature block)
+   ============================================================ */
+.contact { background: var(--feature-bg); color: var(--feature-text); }
+.contact h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: -0.025em; line-height: 1.05; max-width: 16ch;
+}
+.contact .eyebrow { color: color-mix(in srgb, var(--feature-text) 65%, transparent); }
+.contact .email {
+  display: inline-block; margin-top: 1.75rem;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--accent);
+  border-bottom: 2px solid transparent; transition: border-color 0.2s;
+}
+.contact .email:hover { border-color: var(--accent); }
+.socials { display: flex; gap: 1.5rem; margin-top: 2rem; font-family: var(--font-mono); font-size: 0.85rem; }
+.socials a { color: color-mix(in srgb, var(--feature-text) 75%, transparent); transition: color 0.2s; }
+.socials a:hover { color: var(--feature-text); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono); font-size: 0.76rem;
+  color: var(--ink-soft);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ------------------------------------------------------------
+   Default = visible (so content shows even if JS is off).
+   The inline <head> script adds a `js` class, which enables
+   the hidden-then-reveal animation. No flash, no risk of
+   invisible content.
+   ============================================================ */
+.reveal { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+.js .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .dot { animation: none; }
+  html { scroll-behavior: auto; }
+  body, header, .card, .tag, .btn, .contact, .meta, .theme-toggle { transition: none; }
+}
+
+/* visible keyboard focus */
+a:focus-visible, .btn:focus-visible, .theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
