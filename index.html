@@ -6,374 +6,31 @@
   <title>Dilen Pan — Portfolio</title>
   <meta name="description" content="Portfolio of Dilen Pan — software, data, and design projects.">
 
-  <!-- Fonts: Archivo (display), Inter (body), JetBrains Mono (labels) -->
+  <!-- ============================================================
+       THEME PRE-LOAD  (keep this on EVERY page, in the <head>)
+       Applies the saved theme before the page paints, so there's
+       no flash of the wrong color. Also adds a `js` class used by
+       the scroll-reveal animations.
+       ============================================================ -->
+  <script>
+    (function () {
+      try {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var t = localStorage.getItem('theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        d.setAttribute('data-theme', t);
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <style>
-    /* ============================================================
-       DESIGN TOKENS  —  change colors & fonts here
-       ============================================================ */
-    :root {
-      --paper:      #F3F3EE;   /* page background */
-      --paper-dim:  #E8E8E0;   /* subtle panels */
-      --ink:        #14213D;   /* primary text / dark navy */
-      --ink-soft:   #44506B;   /* secondary text */
-      --accent:     #DA9A00;   /* amber highlight */
-      --accent-deep:#A87600;
-      --line:       #D3D4CB;   /* hairlines */
-
-      --maxw: 1080px;
-      --space: clamp(4rem, 9vw, 7rem);  /* vertical rhythm between sections */
-
-      --font-display: 'Archivo', system-ui, sans-serif;
-      --font-body:    'Inter', system-ui, sans-serif;
-      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
-    }
-
-    /* ============================================================
-       BASE
-       ============================================================ */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .wrap {
-      width: 100%;
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0 clamp(1.25rem, 5vw, 3rem);
-    }
-
-    /* small monospace label used as eyebrows */
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    /* ============================================================
-       HEADER / NAV
-       ============================================================ */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: color-mix(in srgb, var(--paper) 88%, transparent);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-    .logo {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.05rem;
-      letter-spacing: -0.01em;
-    }
-    .logo span { color: var(--accent-deep); }
-    .nav-links {
-      display: flex;
-      gap: clamp(1rem, 3vw, 2rem);
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-    }
-    .nav-links a {
-      color: var(--ink-soft);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-
-    /* ============================================================
-       HERO
-       ============================================================ */
-    .hero {
-      position: relative;
-      padding: clamp(4.5rem, 12vw, 9rem) 0 clamp(3.5rem, 8vw, 6rem);
-      overflow: hidden;
-    }
-    /* faint blueprint grid — the signature texture */
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 38px 38px;
-      opacity: 0.35;
-      mask-image: radial-gradient(ellipse 80% 70% at 30% 30%, #000 30%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 30%, #000 30%, transparent 80%);
-      pointer-events: none;
-    }
-    .hero .wrap { position: relative; }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1.75rem;
-    }
-    .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 0 var(--accent);
-      animation: pulse 2.4s infinite;
-    }
-    @keyframes pulse {
-      0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
-      70%  { box-shadow: 0 0 0 8px transparent; }
-      100% { box-shadow: 0 0 0 0 transparent; }
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(2.6rem, 8vw, 5rem);
-      line-height: 1.02;
-      letter-spacing: -0.025em;
-      max-width: 15ch;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent-deep);
-    }
-    .hero .lead {
-      margin-top: 1.5rem;
-      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-      color: var(--ink-soft);
-      max-width: 48ch;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-top: 2.5rem;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
-      padding: 0.8rem 1.4rem;
-      border: 1px solid var(--ink);
-      transition: transform 0.15s, background 0.2s, color 0.2s;
-    }
-    .btn-primary { background: var(--ink); color: var(--paper); }
-    .btn-primary:hover { transform: translateY(-2px); }
-    .btn-ghost:hover { background: var(--ink); color: var(--paper); }
-
-    /* ============================================================
-       SECTION SCAFFOLD
-       ============================================================ */
-    section { padding: var(--space) 0; }
-
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 3rem;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1rem;
-    }
-    .section-head h2 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      letter-spacing: -0.02em;
-    }
-    .section-head .eyebrow { margin-left: auto; }
-
-    /* ============================================================
-       WORK  — project cards styled like spec sheets
-       ============================================================ */
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-    .card {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-      padding: clamp(1.5rem, 4vw, 2.5rem);
-      background: var(--paper);
-      border: 1px solid var(--line);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .card:hover {
-      border-color: var(--ink);
-      transform: translateY(-3px);
-      box-shadow: 6px 6px 0 var(--paper-dim);
-    }
-    @media (min-width: 720px) {
-      .card { grid-template-columns: 1.6fr 1fr; gap: 2.5rem; }
-    }
-
-    .card h3 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.45rem;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.6rem;
-    }
-    .card p { color: var(--ink-soft); }
-    .card-links {
-      display: flex;
-      gap: 1.25rem;
-      margin-top: 1.25rem;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-    }
-    .card-links a {
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 2px;
-      transition: color 0.2s;
-    }
-    .card-links a:hover { color: var(--accent-deep); }
-
-    /* spec sheet meta column */
-    .meta {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.4rem 1rem;
-      align-content: start;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      padding-top: 0.4rem;
-      border-top: 1px dashed var(--line);
-    }
-    @media (min-width: 720px) {
-      .meta { border-top: none; border-left: 1px dashed var(--line); padding: 0 0 0 1.5rem; }
-    }
-    .meta dt { color: var(--ink-soft); }
-    .meta dd { color: var(--ink); }
-
-    /* ============================================================
-       ABOUT
-       ============================================================ */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    @media (min-width: 760px) {
-      .about-grid { grid-template-columns: 1.4fr 1fr; gap: 4rem; }
-    }
-    .about-grid p { font-size: 1.05rem; margin-bottom: 1rem; color: var(--ink-soft); }
-    .about-grid p strong { color: var(--ink); font-weight: 600; }
-
-    .skills h4 {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--ink-soft);
-      margin: 1.5rem 0 0.6rem;
-    }
-    .skills h4:first-child { margin-top: 0; }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      padding: 0.35rem 0.7rem;
-      border: 1px solid var(--line);
-      background: var(--paper-dim);
-    }
-
-    /* ============================================================
-       CONTACT  — dark section for contrast
-       ============================================================ */
-    .contact {
-      background: var(--ink);
-      color: var(--paper);
-    }
-    .contact h2 {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      letter-spacing: -0.025em;
-      line-height: 1.05;
-      max-width: 16ch;
-    }
-    .contact .eyebrow { color: color-mix(in srgb, var(--paper) 70%, transparent); }
-    .contact .email {
-      display: inline-block;
-      margin-top: 1.75rem;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      color: var(--accent);
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.2s;
-    }
-    .contact .email:hover { border-color: var(--accent); }
-    .socials {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-    }
-    .socials a {
-      color: color-mix(in srgb, var(--paper) 80%, transparent);
-      transition: color 0.2s;
-    }
-    .socials a:hover { color: var(--paper); }
-
-    /* ============================================================
-       FOOTER
-       ============================================================ */
-    footer {
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--line);
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      color: var(--ink-soft);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    /* ============================================================
-       SCROLL REVEAL
-       ============================================================ */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
-    .reveal.in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      .dot { animation: none; }
-      html { scroll-behavior: auto; }
-    }
-
-    /* visible keyboard focus */
-    a:focus-visible, .btn:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-  </style>
+  <!-- Shared styles (keep this link on every page) -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -382,11 +39,25 @@
   <header>
     <div class="wrap nav">
       <a href="#top" class="logo">Dilen Pan<span>.</span></a>
-      <nav class="nav-links">
-        <a href="#work">work</a>
-        <a href="#about">about</a>
-        <a href="#contact">contact</a>
-      </nav>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#work">work</a>
+          <a href="#about">about</a>
+          <a href="#contact">contact</a>
+        </nav>
+        <!-- Dark mode toggle. Shows a moon in light mode, a sun in dark mode. -->
+        <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Toggle dark mode">
+          <svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path fill="currentColor" d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/>
+          </svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/>
+            </g>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -551,21 +222,8 @@
     <span>Built from scratch · hosted on GitHub Pages</span>
   </footer>
 
-  <script>
-    // Reveal sections on scroll (skipped if user prefers reduced motion)
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const items = document.querySelectorAll('.reveal');
-    if (prefersReduced || !('IntersectionObserver' in window)) {
-      items.forEach(el => el.classList.add('in'));
-    } else {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.15 });
-      items.forEach(el => io.observe(el));
-    }
-  </script>
+  <!-- Shared behavior (keep this on every page, right before </body>) -->
+  <script src="main.js"></script>
 
 </body>
 </html>
