@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dilen Pan — Portfolio</title>
-  <meta name="description" content="Portfolio of Dilen Pan — software, data, and design projects.">
+  <title>Dilen Panchal — Portfolio</title>
+  <meta name="description" content="Dilen Panchal — Materials Science &amp; Engineering student at UC Irvine focused on design, manufacturing, and hands-on hardware.">
 
   <!-- ============================================================
-       THEME PRE-LOAD  (keep this on EVERY page, in the <head>)
-       Applies the saved theme before the page paints, so there's
-       no flash of the wrong color. Also adds a `js` class used by
-       the scroll-reveal animations.
+       THEME PRE-LOAD (keep on EVERY page, in the <head>)
        ============================================================ -->
   <script>
     (function () {
@@ -24,12 +21,9 @@
     })();
   </script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Shared styles (keep this link on every page) -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -38,14 +32,13 @@
   <!-- ========================= HEADER ========================= -->
   <header>
     <div class="wrap nav">
-      <a href="#top" class="logo">Dilen Pan<span>.</span></a>
+      <a href="#top" class="logo">Dilen Panchal<span>.</span></a>
       <div class="nav-right">
         <nav class="nav-links">
           <a href="#work">work</a>
           <a href="#about">about</a>
           <a href="#contact">contact</a>
         </nav>
-        <!-- Dark mode toggle. Shows a moon in light mode, a sun in dark mode. -->
         <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Toggle dark mode">
           <svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
             <path fill="currentColor" d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/>
@@ -66,18 +59,19 @@
     <div class="wrap">
       <div class="status">
         <span class="dot"></span>
-        <span class="eyebrow">Open to new roles · 2026</span>
+        <!-- EDIT: your availability. You graduate 2028, so this is likely internships — adjust the term/year. -->
+        <span class="eyebrow">Open to internships · 2026</span>
       </div>
-      <!-- EDIT: your headline. Keep it short and specific. -->
-      <h1>I build software, work with data, and <em>design</em> the things in between.</h1>
-      <!-- EDIT: one or two sentences about who you are. -->
+      <!-- EDIT: tentative headline — make it yours. -->
+      <h1>Materials science student who designs, builds, and <em>manufactures</em> real hardware.</h1>
       <p class="lead">
-        A generalist who likes shipping real things end to end — from the first
-        line of code to the last pixel. Here's a look at what I've made.
+        A hands-on engineer who takes a design from CAD to a finished, tested part —
+        machined, welded, printed, and validated. Here's some of what I've built.
       </p>
       <div class="cta-row">
         <a href="#work" class="btn btn-primary">View work →</a>
-        <!-- EDIT: your GitHub profile URL -->
+        <!-- Upload your PDF to the repo root with this exact name, or change the filename here. -->
+        <a href="DilenPanchalResume.pdf" class="btn btn-ghost" target="_blank" rel="noopener">Résumé (PDF) ↓</a>
         <a href="https://github.com/dilenpan228" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
@@ -93,63 +87,101 @@
 
       <div class="projects">
 
-        <!-- ============ PROJECT 1 — replace everything inside ============ -->
+        <!-- ============ PROJECT 1 — UCI Solar Car ============ -->
         <article class="card reveal">
+          <div class="card-media">
+            <!-- When ready, replace this <span> with:
+                 <img src="images/solar-car-chassis.jpg" alt="UCI solar car chassis"> -->
+            <span class="ph">images/solar-car-chassis.jpg</span>
+          </div>
           <div>
-            <h3>Project One</h3>
+            <h3>Solar Car Chassis</h3>
             <p>
-              A short description of what this project does, the problem it solves,
-              and what you specifically built. One or two sentences is plenty.
+              Designed and fabricated a prototype space-frame chassis for UCI's Formula
+              Sun Grand Prix car, running roll-hoop FEA across impact load cases and
+              cutting significant weight while holding the required factor of safety.
             </p>
+            <dl class="meta">
+              <div><dt>Tools</dt><dd>SolidWorks, MIG, 3D print</dd></div>
+              <div><dt>Process</dt><dd>FEA, fabrication</dd></div>
+              <div><dt>Year</dt><dd>2025–present</dd></div>
+            </dl>
             <div class="card-links">
-              <a href="#" target="_blank" rel="noopener">Live demo ↗</a>
-              <a href="#" target="_blank" rel="noopener">Source ↗</a>
+              <a href="#" target="_blank" rel="noopener">View project →</a>
             </div>
           </div>
-          <dl class="meta">
-            <dt>Stack</dt><dd>Python, React</dd>
-            <dt>Role</dt><dd>Solo build</dd>
-            <dt>Year</dt><dd>2025</dd>
-          </dl>
         </article>
 
-        <!-- ============ PROJECT 2 ============ -->
+        <!-- ============ PROJECT 2 — ASME HPVC ============ -->
         <article class="card reveal">
+          <div class="card-media">
+            <!-- <img src="images/hpvc-fixture.jpg" alt="Welding fixture components"> -->
+            <span class="ph">images/hpvc-fixture.jpg</span>
+          </div>
           <div>
-            <h3>Project Two</h3>
+            <h3>Welding Fixture &amp; Components</h3>
             <p>
-              Describe the second project here. Mention the outcome or what you
-              learned — hiring managers love seeing impact and decisions.
+              For the ASME Human Powered Vehicle Challenge, designed and manufactured
+              CNC-cut fixture components with full GD&amp;T drawings, applying DFM
+              principles and verifying tolerance fit across mating interfaces.
             </p>
+            <dl class="meta">
+              <div><dt>Tools</dt><dd>SolidWorks, CNC, lathe</dd></div>
+              <div><dt>Process</dt><dd>DFM, GD&amp;T</dd></div>
+              <div><dt>Year</dt><dd>2025–26</dd></div>
+            </dl>
             <div class="card-links">
-              <a href="#" target="_blank" rel="noopener">Live demo ↗</a>
-              <a href="#" target="_blank" rel="noopener">Source ↗</a>
+              <a href="#" target="_blank" rel="noopener">View project →</a>
             </div>
           </div>
-          <dl class="meta">
-            <dt>Stack</dt><dd>Pandas, SQL</dd>
-            <dt>Role</dt><dd>Data + viz</dd>
-            <dt>Year</dt><dd>2025</dd>
-          </dl>
         </article>
 
-        <!-- ============ PROJECT 3 (delete this whole <article> if you only have 2) ============ -->
+        <!-- ============ PROJECT 3 — FIRST Robotics ============ -->
         <article class="card reveal">
+          <div class="card-media">
+            <!-- <img src="images/frc-robot.jpg" alt="FRC competition robot"> -->
+            <span class="ph">images/frc-robot.jpg</span>
+          </div>
           <div>
-            <h3>Project Three</h3>
+            <h3>FRC Mechanical Build (Team 670)</h3>
             <p>
-              A third project, if you have one. Three strong projects is a great
-              starting point — quality beats quantity here.
+              Led mechanical fabrication for a competition robotics team — machining
+              precision components to tight tolerances, designing integrated electrical
+              enclosures, and mentoring new members in Fusion 360.
             </p>
+            <dl class="meta">
+              <div><dt>Tools</dt><dd>Fusion 360, mill</dd></div>
+              <div><dt>Process</dt><dd>Machining, mentorship</dd></div>
+              <div><dt>Year</dt><dd>2021–25</dd></div>
+            </dl>
             <div class="card-links">
-              <a href="#" target="_blank" rel="noopener">Source ↗</a>
+              <a href="#" target="_blank" rel="noopener">View project →</a>
             </div>
           </div>
-          <dl class="meta">
-            <dt>Stack</dt><dd>Figma, HTML/CSS</dd>
-            <dt>Role</dt><dd>Design</dd>
-            <dt>Year</dt><dd>2024</dd>
-          </dl>
+        </article>
+
+        <!-- ============ PROJECT 4 — IEEE Rover (delete if you'd rather feature only 3) ============ -->
+        <article class="card reveal">
+          <div class="card-media">
+            <!-- <img src="images/ieee-rover.jpg" alt="Remote-controlled rover"> -->
+            <span class="ph">images/ieee-rover.jpg</span>
+          </div>
+          <div>
+            <h3>Remote-Controlled Rover</h3>
+            <p>
+              Built a custom PCB, assembled the electronics, and programmed firmware for
+              a wirelessly controlled rover — including motor-control circuits and
+              wire-harness routing, using Arduino and Raspberry Pi.
+            </p>
+            <dl class="meta">
+              <div><dt>Tools</dt><dd>Arduino, Raspberry Pi</dd></div>
+              <div><dt>Process</dt><dd>PCB design, firmware</dd></div>
+              <div><dt>Year</dt><dd>2025–present</dd></div>
+            </dl>
+            <div class="card-links">
+              <a href="#" target="_blank" rel="noopener">View project →</a>
+            </div>
+          </div>
         </article>
 
       </div>
@@ -165,36 +197,53 @@
       </div>
       <div class="about-grid reveal">
         <div>
-          <!-- EDIT: a few honest sentences about you. -->
+          <!-- EDIT freely — this is written to be accurate to your resume. -->
           <p>
-            <strong>Hi, I'm Dilen.</strong> I'm a builder at heart who enjoys
-            wearing a lot of hats — writing code, digging into data, and shaping
-            how things look and feel.
+            <strong>Hi, I'm Dilen.</strong> I'm a Materials Science &amp; Engineering
+            student at UC Irvine (B.S. expected 2028) with a manufacturing-first,
+            hands-on approach — I like taking a design all the way from CAD to a
+            physical part I can test.
           </p>
           <p>
-            I taught myself this site from scratch with plain HTML and CSS, which
-            is pretty representative of how I like to work: get hands-on, understand
-            the whole stack, and ship something real.
+            Most of my experience comes from student engineering teams and competitions:
+            designing and fabricating a solar-car chassis, machining and welding vehicle
+            components, and leading mechanical build efforts in robotics.
           </p>
           <p>
-            Right now I'm looking for my next role where I can keep growing and
-            contribute to a team building things that matter.
+            I'm looking for internships where I can keep building real hardware and
+            learn alongside a strong engineering team.
           </p>
         </div>
         <div class="skills">
-          <h4>Languages</h4>
+          <h4>CAD &amp; Analysis</h4>
           <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">HTML/CSS</span>
-            <span class="tag">SQL</span>
+            <span class="tag">SolidWorks</span>
+            <span class="tag">Fusion 360</span>
+            <span class="tag">FEA (SolidWorks)</span>
+            <span class="tag">Tolerance Analysis</span>
+            <span class="tag">GD&amp;T</span>
           </div>
-          <h4>Tools</h4>
+          <h4>Manufacturing</h4>
           <div class="tags">
+            <span class="tag">CNC Router</span>
+            <span class="tag">Mill</span>
+            <span class="tag">Lathe</span>
+            <span class="tag">MIG Welding</span>
+            <span class="tag">3D Printing</span>
+          </div>
+          <h4>Programming</h4>
+          <div class="tags">
+            <span class="tag">MATLAB</span>
+            <span class="tag">Python</span>
+            <span class="tag">C++</span>
             <span class="tag">Git</span>
-            <span class="tag">React</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Figma</span>
+          </div>
+          <h4>Electronics</h4>
+          <div class="tags">
+            <span class="tag">Arduino</span>
+            <span class="tag">Raspberry Pi</span>
+            <span class="tag">Soldering</span>
+            <span class="tag">Embedded Systems</span>
           </div>
         </div>
       </div>
@@ -206,23 +255,20 @@
     <div class="wrap">
       <span class="eyebrow">// get in touch</span>
       <h2 style="margin-top:0.75rem;">Let's build something together.</h2>
-      <!-- EDIT: your real email -->
-      <a class="email" href="mailto:you@example.com">you@example.com</a>
+      <a class="email" href="mailto:dilenpan228@gmail.com">dilenpan228@gmail.com</a>
       <div class="socials">
-        <!-- EDIT: your real links -->
         <a href="https://github.com/dilenpan228" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://www.linkedin.com/in/dilenpanchal" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
   </section>
 
   <!-- ========================= FOOTER ========================= -->
   <footer class="wrap">
-    <span>© 2026 Dilen Pan</span>
+    <span>© 2026 Dilen Panchal</span>
     <span>Built from scratch · hosted on GitHub Pages</span>
   </footer>
 
-  <!-- Shared behavior (keep this on every page, right before </body>) -->
   <script src="main.js"></script>
 
 </body>
